@@ -20,11 +20,3 @@ export class AppController {
     return this.appService.getHello();
   }
 }
-
-@Controller('cats') // "/cats"
-export class CatsController {
-  @Get()
-  findAll(): string {
-    return 'http://localhost:3000/cats にGETリクエスト投げたからこのテキストが返ってきてます';
-  }
-}
