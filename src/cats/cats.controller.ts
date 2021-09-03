@@ -14,6 +14,7 @@ import { CreateCatDto, UpdateCatDto } from './dto';
 import { CatsService } from './cats.service';
 import { ForbiddenException } from '../forbidden.exception';
 import { HttpExceptionFilter } from '../http-exception.filter';
+import { ParseIntPipe } from '@nestjs/common';
 
 // import { Cat } from './interfaces/cat.interface';
 
@@ -35,7 +36,13 @@ export class CatsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ) {
     return `success!! GET #${id} cat`;
   }
 
